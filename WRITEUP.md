@@ -88,15 +88,12 @@ returns immediately.
 
 **Preventing unfair balance drain during inactivity (e.g., falling asleep or leaving phone on Home Screen)**
 
-If a child leaves the device open on an app without actively using it, their hard-earned balance could drain to zero. This feels like a punishing UX and defeats the purpose of the reward system. However, accurately determining "inactivity" is a non-trivial challenge. 
-
-Here is my technical and UX point of view on how we could solve this collaboratively:
+If a child leaves the device open on an app without actively using it, their hard-earned balance could drain to zero. This feels like a punishing UX and defeats the purpose of the reward system. However, accurately determining "inactivity" is a non-trivial challenge. To be honest I don't have perfect solution curious to build with team and these are just some of my not so perfect suggestions:-
 
 1. **Client-Side Idle Detection**: The server cannot definitively know if a user is active; it relies on the client's reporting. We should implement an idle timer on the client (e.g., tracking touch events, scroll, or device motion). If no input is detected for 2 minutes, the client stops the active usage session and stops sending deduction heartbeats.
 2. **"Are you still there?" Prompt (The Netflix Model)**: Abruptly pausing balance and locking the app could be jarring. At the 2-minute idle mark, the app could show a full-screen prompt: *"Are you still playing?"* with a 30-second countdown. If ignored, the session officially pauses. If tapped, the session continues seamlessly.
 3. **Retroactive Grace Period**: If we determine the user was inactive for the last 2 minutes, we shouldn't charge them for that time. The client could send a retroactive "refund" adjustment, or heartbeats could be kept in a "pending" state on the server until the client confirms the user is still active.
-4. **Leveraging Native OS Capabilities**: Instead of just touch events, we could explore iOS's `Screen Attention` or Android's `Attention Screen` APIs, which use the camera/sensors to detect if a face is actually looking at the screen. 
-5. **Abuse Prevention**: We must consider the "auto-tapper" or "drinking bird" exploit where a child tries to fake activity. We'd need to filter out repetitive, perfectly timed inputs on identical screen coordinates to ensure the activity is genuine.
+
 
 This strikes a balance between technical feasibility and a fair, user-friendly experience that builds trust with both the child and the parent.
 
