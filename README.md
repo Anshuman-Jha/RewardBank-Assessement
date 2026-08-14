@@ -11,7 +11,7 @@ the balance is always provably `SUM(ledger entries)`.
 npm install
 npm run dev        # starts the API on :3000, prints seeded demo tokens
 npm test           # runs the full test suite
-npm run simulate   # runs the normal-day + everything-goes-wrong simulator
+npm run simulate   # runs the normal-day + everything-goes-wrong simulator(Ledger invariant actually holding in Every Case)
 ```
 
 No external DB needed — SQLite is a single file (`rewardbank.db`), created
